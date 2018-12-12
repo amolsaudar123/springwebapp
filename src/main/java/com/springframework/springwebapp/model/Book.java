@@ -1,9 +1,8 @@
 package com.springframework.springwebapp.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+
 @Entity
 public class Book {
     @Id
@@ -12,27 +11,33 @@ public class Book {
 
     private String title;
     private String isbin;
-    private String publisher;
+
+    @OneToOne
+    private Publisher publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    public Book() {
-    }
 
-    public Book(String title, String isbin, String publisher) {
+    public Book(String title, String isbin) {
         this.title = title;
         this.isbin = isbin;
-        this.publisher = publisher;
+
     }
 
-    public Book(String title, String isbin, String publisher, Set<Author> authors) {
+    public Book(String title, String isbin, Publisher publisher, Set<Author> authors) {
         this.title = title;
         this.isbin = isbin;
         this.publisher = publisher;
         this.authors = authors;
+    }
+
+    public Book(String name, String isbin, Publisher publisher) {
+        this.title=name;
+        this.isbin=isbin;
+        this.publisher=publisher;
     }
 
     public String getTitle() {
@@ -51,11 +56,11 @@ public class Book {
         this.isbin = isbin;
     }
 
-    public String getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 
