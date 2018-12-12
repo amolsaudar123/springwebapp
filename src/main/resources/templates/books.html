@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+
+<head>
+
+    <meta name="description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="https://bootswatch.com/4/cerulean/bootstrap.min.css" />
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Book List</span>
+</nav>
+
+<div class="container">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <th:block layout:fragment="breadcrumb">
+            </th:block>
+        </ol>
+    </nav>
+    <div class="content">
+        <div layout:fragment="page_content">
+            <table>
+                <tr>
+                <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+                <tr th:each="book:${book}">
+                    <td th:text="${book.id}">1</td>
+                    <td th:text="${book.title}">xxxx</td>
+                    <td th:text="${book.publisher.name}">cccc</td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+</script>
+<th:block layout:fragment="scripts">
+</th:block>
+</body>
+
+</html>
